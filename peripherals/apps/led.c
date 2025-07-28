@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "led.h"
+#include "uart.h"
+
 
 static int led_state = 0; // 0 == off, 1 == on
 
@@ -8,12 +10,26 @@ void led_toggle(void){
     printf("[LED] Toggled %s\n", led_state ? "ON" : "OFF");
 }
 
-void led_on(void){
+char* led_on(void){
     led_state = 1;
-    printf("[LED] Turned On\n");
+    return "[LED] Turned ON";
 }
 
-void led_off(void){
+char* led_off(void){
     led_state = 0;
-    printf("[LED] Turned OFF\n");
+    return "[LED] Turned OFF";
+}
+
+int led_get_state(){
+    return led_state;
+}
+
+void log_led_status(void){
+    int state = led_get_state();
+    if(state){
+        uart_write(led_on());
+    }
+    else{
+        uart_write(led_off());
+    }
 }

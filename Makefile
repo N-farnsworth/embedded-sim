@@ -2,16 +2,16 @@
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -Iperipherals/includes -Iutils
 
 # Source files
 SRC = main.c scheduler.c  \
-      peripherals/led.c   \
-      peripherals/uart.c  \
+      peripherals/apps/led.c   \
+      peripherals/apps/uart.c  \
       utils/time.c
 
 # Output binary
-TARGET = embedded_sim
+TARGET = builds/embedded_sim
 
 all:
 	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)

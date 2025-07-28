@@ -2,7 +2,7 @@
 #include <unistd.h> // For usleep
 #include "scheduler.h"
 
-#define MAX_TASKS 4 // Maximum number of tasks in our system
+#define MAX_TASKS 20 // Maximum number of tasks in our system
 
 static Task task_list[MAX_TASKS];
 static int num_tasks = 0;
@@ -12,7 +12,8 @@ void add_task(const char* name, TaskFunction func, int period_ms){
         task_list[num_tasks].name = name;
         task_list[num_tasks].func = func;
         task_list[num_tasks].period_ms = period_ms;
-        task_list[num_tasks].counter_ms = 0; 
+        task_list[num_tasks].counter_ms = 0;
+        task_list[num_tasks].sleeping = true; 
         num_tasks++;
     }
 }

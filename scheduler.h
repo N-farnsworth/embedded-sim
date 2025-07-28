@@ -1,6 +1,8 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
+#include <stdbool.h>
+
 typedef void(*TaskFunction)(void);
 
 typedef struct{
@@ -8,6 +10,7 @@ typedef struct{
     TaskFunction func;
     int period_ms;
     int counter_ms;
+    bool sleeping;
 }Task;
 
 void add_task(const char* name, TaskFunction func, int period_ms);
